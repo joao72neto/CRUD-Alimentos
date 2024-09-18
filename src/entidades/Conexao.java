@@ -1,4 +1,4 @@
-package banco;
+package entidades;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

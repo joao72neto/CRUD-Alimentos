@@ -1,11 +1,10 @@
-package entidade;
+package entidades;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import banco.Conexao;
 
 public class Crud extends Conexao{
     
@@ -51,4 +50,18 @@ public class Crud extends Conexao{
 
     }
 
+    //Métodos capaz de visualizar os dados da tabela
+    public void visualizar(){
+
+    }
+
+    //Modificar um dado existente
+    public void Atualizar(){
+        
+    }
+
+    //Deletar um dados específico
+    public void Deletar(){
+        
+    }
 }
