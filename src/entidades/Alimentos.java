@@ -22,7 +22,7 @@ public class Alimentos extends Crud {
 
     //Construtores da classe
     public Alimentos(){
-       
+       tabela = "alimentos";
     }
 
     
@@ -32,6 +32,8 @@ public class Alimentos extends Crud {
                     double alm_peso_por_unidade, String alm_marca,
                     String alm_pais_origem, String alm_codigo_barras) {
 
+        tabela = "alimentos";
+        tbl_id = "alm_id";
         this.alm_nome = alm_nome;
         this.alm_categoria = alm_categoria;
         this.alm_quantidade_estoque = alm_quantidade_estoque;

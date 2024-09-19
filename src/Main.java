@@ -15,5 +15,9 @@ public class Main {
                                         3, "apple", "Brasil","23423423423");
         
         prod.confirmarDados();
+        prod.visualizar();
+        //prod.atualizar("alm_nome", "'pera'", 2);
+      
+       
     }
 }
