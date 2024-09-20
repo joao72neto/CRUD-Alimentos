@@ -1,10 +1,15 @@
 package entidades;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+
+import oracle.jdbc.internal.ResultSetCache;
 
 public class Conexao {
+
+    //Atributos
+    protected ArrayList<String> columnNames;
+
 
     //Método que estabelece conexão com o banco de dados
     public Connection getConexao() throws ClassNotFoundException, SQLException{
@@ -23,5 +28,27 @@ public class Conexao {
 
         //Retornando a conexão
         return con;
+    }
+
+    public ArrayList<String> getColunas(){
+        
+        //Alocando memória para o ArrayList
+        columnNames = new ArrayList<>();
+
+        //Pegando os dados do banco de dados
+        DatabaseMetaData metaData = getConexao().getMetaData();
+
+        //Pegando os nomes das colunas
+        try(ResultSet rs = metaData.getColumns(null, null, |"alimentos", null)){
+
+            while(rs.next()){
+                String columnName = rs.getString("COLUMN_NAME");
+                columnNames.add(columnName);
+            }
+        }
+
+        //Retornano o nomes das colunas
+        return columnNames;
+
     }
 }

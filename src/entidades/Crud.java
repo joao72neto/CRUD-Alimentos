@@ -100,7 +100,7 @@ public class Crud extends Conexao{
 
         //Verificando se o banco está vazio
         if (alm_id == 0) {
-            System.out.println("Banco vazio");
+            System.out.println("\nBanco vazio");
             vazio = true;
         }
 
@@ -119,7 +119,13 @@ public class Crud extends Conexao{
         Connection con = getConexao();
 
         //Preparando o comando SQL
-        String sql = "update " + tabela + " set " + coluna + " = " + valor + " where " + tbl_id + " = " + id;
+        String sql = String.format("update %s set %s = %s where %s = %d", 
+                                    tabela,
+                                    coluna, 
+                                    valor,
+                                    tbl_id, 
+                                    id);
+
         PreparedStatement comando = con.prepareStatement(sql);
 
 
