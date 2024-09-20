@@ -33,7 +33,7 @@ public class Conexao {
         DatabaseMetaData metaData = getConexao().getMetaData();
 
         //Pegando os nomes das colunas
-        ResultSet rs = metaData.getColumns(null, null,"alimentos", null);
+        ResultSet rs = metaData.getColumns(null, null,"ALIMENTOS", null);
 
         while(rs.next()){
             String columnName = rs.getString("COLUMN_NAME");

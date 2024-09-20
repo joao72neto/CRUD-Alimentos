@@ -17,10 +17,10 @@ public class Crud extends Conexao{
         String nomeTabela = tabela.getNomeTabela();
 
         //Inserindo dados de forma dinâmica
-        StringBuilder insert = new StringBuilder("insert into " + nomeTabela + "(");
+        StringBuilder insert = new StringBuilder("insert into " + nomeTabela + " (");
 
         //Colocando o nome das colunas
-        for(int i=0; i < nomeColunas.size(); i++){
+        for(int i=1; i < nomeColunas.size(); i++){
             insert.append(nomeColunas.get(i));
 
             if(i < nomeColunas.size()-1){
@@ -32,8 +32,19 @@ public class Crud extends Conexao{
         insert.append(") values (");
 
         for(int i=0; i < valorColunas.size(); i++){
-            insert.append("'" + valorColunas.get(i) + "'");
 
+            //Adicionando os valores
+            if(valorColunas.get(i) instanceof Date){
+                insert.append("to_date('" + valorColunas.get(i) + "', 'YYYY-MM-DD')");
+
+            }else if(valorColunas.get(i) instanceof Double || valorColunas.get(i) instanceof Integer){
+                insert.append(valorColunas.get(i));
+
+            }else{
+                insert.append("'" + valorColunas.get(i) + "'");
+            }
+
+            //Adicionando a vírgula que separa os valores
             if(i < valorColunas.size()-1){
                 insert.append(", ");
             }

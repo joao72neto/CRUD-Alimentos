@@ -11,9 +11,12 @@ public class Alimentos extends Crud implements Tabelas{
     //Construtores da classe    
     public Alimentos(String alm_nome, String alm_categoria, 
                     double alm_quantidade_estoque, double alm_preco,
-                    String alm_data_validade, String alm_data_fabricacao, 
+                    Date alm_data_validade, Date alm_data_fabricacao, 
                     double alm_peso_por_unidade, String alm_marca,
                     String alm_pais_origem, String alm_codigo_barras) {
+        
+        //Alocando espaço para o ArrayList
+        valorColunas = new ArrayList<>();
 
         valorColunas.add(alm_nome);
         valorColunas.add(alm_categoria);
