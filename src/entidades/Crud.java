@@ -15,10 +15,10 @@ public class Crud extends Conexao{
     protected Boolean vazio = false;
 
     //Atributos da classe
-    public void cadastrar() throws ClassNotFoundException, SQLException{
+    public void cadastrar(Object tabela) throws ClassNotFoundException, SQLException{
         
         Connection con = getConexao();
-
+        
 
         //Preparando o comando SQL
         String sql = "INSERT INTO ALIMENTOS (alm_nome, alm_categoria, alm_quantidade_estoque, alm_preco, alm_data_validade, alm_data_fabricacao, alm_peso_por_unidade, alm_marca, alm_pais_origem, alm_codigo_barras) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -60,7 +60,6 @@ public class Crud extends Conexao{
     //Métodos capaz de visualizar os dados da tabela
     public void visualizar() throws ClassNotFoundException, SQLException{
 
-        int alm_id=0;
         Connection con = getConexao();
 
         //Preparando o comando SQL
@@ -96,12 +95,6 @@ public class Crud extends Conexao{
                                "\nPAÍS DE ORIGEM: " + alm_pais_origem + 
                                "\nCÓDIGO DE BARRAS: " + alm_codigo_barrar);
 
-        }
-
-        //Verificando se o banco está vazio
-        if (alm_id == 0) {
-            System.out.println("\nBanco vazio");
-            vazio = true;
         }
 
 

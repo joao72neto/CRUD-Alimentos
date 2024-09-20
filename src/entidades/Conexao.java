@@ -3,13 +3,7 @@ package entidades;
 import java.sql.*;
 import java.util.ArrayList;
 
-import oracle.jdbc.internal.ResultSetCache;
-
 public class Conexao {
-
-    //Atributos
-    protected ArrayList<String> columnNames;
-
 
     //Método que estabelece conexão com o banco de dados
     public Connection getConexao() throws ClassNotFoundException, SQLException{
@@ -33,7 +27,7 @@ public class Conexao {
     public ArrayList<String> getColunas(){
         
         //Alocando memória para o ArrayList
-        columnNames = new ArrayList<>();
+        ArrayList<String> columnNames = new ArrayList<>();
 
         //Pegando os dados do banco de dados
         DatabaseMetaData metaData = getConexao().getMetaData();
@@ -47,8 +41,7 @@ public class Conexao {
             }
         }
 
-        //Retornano o nomes das colunas
+        //Retornando as colunas da tabela do banco de dados
         return columnNames;
-
     }
 }
