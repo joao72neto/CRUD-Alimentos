@@ -1,34 +1,57 @@
 package entidades;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class Crud extends Conexao{
     
-    protected ArrayList<Object> colunas;
-    protected String tabela;
-    protected String tbl_id;
-    protected Boolean vazio = false;
 
     //Atributos da classe
-    public void cadastrar(Object tabela) throws ClassNotFoundException, SQLException{
-        
+    public void cadastrar(Tabelas tabela) throws ClassNotFoundException, SQLException{
+        //Realizando a conexão com o banco de dados
         Connection con = getConexao();
         
+        //Pegando iformações sobre a tabela
+        ArrayList<String> nomeColunas = getNomeColunas();
+        ArrayList<Object> valorColunas = tabela.getValorColunas();
+        String nomeTabela = tabela.getNomeTabela();
 
-        //Preparando o comando SQL
-        String sql = "INSERT INTO ALIMENTOS (alm_nome, alm_categoria, alm_quantidade_estoque, alm_preco, alm_data_validade, alm_data_fabricacao, alm_peso_por_unidade, alm_marca, alm_pais_origem, alm_codigo_barras) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        //Inserindo dados de forma dinâmica
+        StringBuilder insert = new StringBuilder("insert into " + nomeTabela + "(");
+
+        //Colocando o nome das colunas
+        for(int i=0; i < nomeColunas.size(); i++){
+            insert.append(nomeColunas.get(i));
+
+            if(i < nomeColunas.size()-1){
+                insert.append(", ");
+            }
+        }
+
+        //adicionando os valores a serem inseridos
+        insert.append(") values (");
+
+        for(int i=0; i < valorColunas.size(); i++){
+            insert.append("'" + valorColunas.get(i) + "'");
+
+            if(i < valorColunas.size()-1){
+                insert.append(", ");
+            }
+        }
+
+        //Fechando o insert
+        insert.append(")");
+
+        //Guardando a SQL gerado
+        String sql = insert.toString();
+
         PreparedStatement comando = con.prepareStatement(sql);
 
+        /* 
         //Inserindo os dados
         int i=1;
         for(Object ele : colunas){
         
-    
             if (ele instanceof String){
                 comando.setString(i, (String) ele);
 
@@ -46,10 +69,10 @@ public class Crud extends Conexao{
             
             i++;
         }
+        */
 
         //Executando a instruções SQL
         comando.execute();
-
 
         //Fechando as conexões
         comando.close();
@@ -60,7 +83,7 @@ public class Crud extends Conexao{
     //Métodos capaz de visualizar os dados da tabela
     public void visualizar() throws ClassNotFoundException, SQLException{
 
-        Connection con = getConexao();
+        /*Connection con = getConexao();
 
         //Preparando o comando SQL
         String sql = "select * from " + tabela;
@@ -101,7 +124,7 @@ public class Crud extends Conexao{
         //Fechando as conexões
         comando.close();
         resultado.close();
-        con.close();
+        con.close();*/
 
 
     }
@@ -109,7 +132,7 @@ public class Crud extends Conexao{
     //Modificar um dado existente
     public void atualizar(String coluna, Object valor, int id) throws ClassNotFoundException, SQLException{
 
-        Connection con = getConexao();
+       /* Connection con = getConexao();
 
         //Preparando o comando SQL
         String sql = String.format("update %s set %s = %s where %s = %d", 
@@ -127,14 +150,14 @@ public class Crud extends Conexao{
 
         //Fechando as conexões
         comando.close();
-        con.close();
+        con.close();*/
 
     }
 
     //Deletar um dados específico
     public void deletar(int id) throws ClassNotFoundException, SQLException{
 
-        Connection con = getConexao();
+       /*Connection con = getConexao();
 
         //Preparando o comando SQL
         String sql = String.format("delete from %s where %s = %d", tabela, tbl_id, id);
@@ -145,7 +168,7 @@ public class Crud extends Conexao{
 
         //Fechando as conexões
         comando.close();
-        con.close();
+        con.close();*/
     
     }
 }

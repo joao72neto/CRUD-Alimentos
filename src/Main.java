@@ -14,8 +14,9 @@ public class Main {
         Alimentos prod = new Alimentos("Maçã", "fruta", 100, 2.3, "12-12-2030", "12-12-2024",
                                         3, "apple", "Brasil","23423423423");
         
-        prod.visualizar();
-        //prod.atualizar("alm_nome", "'pera'", 2);
+        
+                                        
+       prod.cadastrar(prod);
       
        
     }

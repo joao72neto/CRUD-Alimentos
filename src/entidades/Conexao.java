@@ -24,7 +24,7 @@ public class Conexao {
         return con;
     }
 
-    public ArrayList<String> getColunas(){
+    public ArrayList<String> getNomeColunas() throws ClassNotFoundException, SQLException{
         
         //Alocando memória para o ArrayList
         ArrayList<String> columnNames = new ArrayList<>();
@@ -33,14 +33,13 @@ public class Conexao {
         DatabaseMetaData metaData = getConexao().getMetaData();
 
         //Pegando os nomes das colunas
-        try(ResultSet rs = metaData.getColumns(null, null, |"alimentos", null)){
+        ResultSet rs = metaData.getColumns(null, null,"alimentos", null);
 
-            while(rs.next()){
-                String columnName = rs.getString("COLUMN_NAME");
-                columnNames.add(columnName);
-            }
+        while(rs.next()){
+            String columnName = rs.getString("COLUMN_NAME");
+            columnNames.add(columnName);
         }
-
+      
         //Retornando as colunas da tabela do banco de dados
         return columnNames;
     }
