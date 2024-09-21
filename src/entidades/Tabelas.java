@@ -1,9 +1,9 @@
 package entidades;
 
-import java.util.ArrayList;
 
 public interface Tabelas {
 
+    //Métodos a serem implementados
     public String getNomeTabela();
-    public ArrayList<Object> getValorColunas();
+    
 }

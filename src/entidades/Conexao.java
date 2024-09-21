@@ -1,7 +1,6 @@
 package entidades;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class Conexao {
 
@@ -24,23 +23,4 @@ public class Conexao {
         return con;
     }
 
-    public ArrayList<String> getNomeColunas() throws ClassNotFoundException, SQLException{
-        
-        //Alocando memória para o ArrayList
-        ArrayList<String> columnNames = new ArrayList<>();
-
-        //Pegando os dados do banco de dados
-        DatabaseMetaData metaData = getConexao().getMetaData();
-
-        //Pegando os nomes das colunas
-        ResultSet rs = metaData.getColumns(null, null,"ALIMENTOS", null);
-
-        while(rs.next()){
-            String columnName = rs.getString("COLUMN_NAME");
-            columnNames.add(columnName);
-        }
-      
-        //Retornando as colunas da tabela do banco de dados
-        return columnNames;
-    }
 }

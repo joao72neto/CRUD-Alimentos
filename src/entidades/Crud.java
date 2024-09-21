@@ -2,6 +2,8 @@ package entidades;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 
 public class Crud extends Conexao{
     
@@ -12,15 +14,15 @@ public class Crud extends Conexao{
         Connection con = getConexao();
         
         //Pegando iformações sobre a tabela
-        ArrayList<String> nomeColunas = getNomeColunas();
-        ArrayList<Object> valorColunas = tabela.getValorColunas();
+        ArrayList<String> nomeColunas = getNomeColunas(tabela);
+        ArrayList<Object> valorColunas = getValorColunas(tabela);
         String nomeTabela = tabela.getNomeTabela();
 
         //Inserindo dados de forma dinâmica
         StringBuilder insert = new StringBuilder("insert into " + nomeTabela + " (");
 
         //Colocando o nome das colunas
-        for(int i=1; i < nomeColunas.size(); i++){
+        for(int i=0; i < nomeColunas.size(); i++){
             insert.append(nomeColunas.get(i));
 
             if(i < nomeColunas.size()-1){
@@ -58,29 +60,6 @@ public class Crud extends Conexao{
 
         PreparedStatement comando = con.prepareStatement(sql);
 
-        /* 
-        //Inserindo os dados
-        int i=1;
-        for(Object ele : colunas){
-        
-            if (ele instanceof String){
-                comando.setString(i, (String) ele);
-
-            }else if (ele instanceof Double){
-                comando.setDouble(i, (Double) ele);
-                
-            }else if (ele instanceof Integer){
-                comando.setInt(i, (Integer) ele);
-
-            }else if (ele instanceof Date){
-                comando.setDate(i, null);
-            }else{
-                throw new IllegalArgumentException("Tipo de dado inválido" + ele.getClass());
-            }
-            
-            i++;
-        }
-        */
 
         //Executando a instruções SQL
         comando.execute();
@@ -92,50 +71,80 @@ public class Crud extends Conexao{
     }
 
     //Métodos capaz de visualizar os dados da tabela
-    public void visualizar() throws ClassNotFoundException, SQLException{
+    public void visualizar(Tabelas tabela) throws ClassNotFoundException, SQLException{
 
-        /*Connection con = getConexao();
+        Connection con = getConexao();
 
         //Preparando o comando SQL
-        String sql = "select * from " + tabela;
+        String sql = "select * from " + tabela.getNomeTabela();
         PreparedStatement comando = con.prepareStatement(sql);
 
         //Capturando todos os resultados
         ResultSet resultado = comando.executeQuery();
+        
+        //Variáveis necessárias para mostrar os dados
+        ArrayList<ArrayList<Object>> dados = new ArrayList<>();
+        ArrayList<String> nomeColunas = getNomeColunas(tabela);
 
         while (resultado.next()) {
-            alm_id = resultado.getInt("alm_id");
-            String alm_nome = resultado.getString("alm_nome");
-            String alm_categoria = resultado.getString("alm_categoria");
-            double alm_quantidade_estoque = resultado.getDouble("alm_quantidade_estoque");
-            double alm_preco = resultado.getDouble("alm_preco");
-            Date alm_data_validade = resultado.getDate("alm_data_validade");
-            Date alm_data_fabricacao = resultado.getDate("alm_data_fabricacao");
-            double alm_peso_por_unidade = resultado.getDouble("alm_peso_por_unidade");
-            String alm_marca = resultado.getString("alm_marca");
-            String alm_pais_origem = resultado.getString("alm_pais_origem");
-            String alm_codigo_barrar = resultado.getString("alm_codigo_barras");
+            //Guardando temporariamento os dados
+            ArrayList<Object> linha = new ArrayList<>();
 
-            //Mostrando o resultado
-            System.out.println("\nID: " + alm_id + 
-                               "\nNOME: " + alm_nome + 
-                               "\nCATEGORIA: " + alm_categoria + 
-                               "\nQTD ESTOQUE: " + alm_quantidade_estoque + 
-                               "\nPREÇO: " + alm_preco + 
-                               "\nDATA VALIDADE: " + alm_data_validade + 
-                               "\nDATA FABRICAÇÃO: " + alm_data_fabricacao + 
-                               "\nPESO/u: " + alm_peso_por_unidade + 
-                               "\nMARCA: " + alm_marca + 
-                               "\nPAÍS DE ORIGEM: " + alm_pais_origem + 
-                               "\nCÓDIGO DE BARRAS: " + alm_codigo_barrar);
 
+            for(int i=1; i <= nomeColunas.size(); i++){
+
+                Object valor = resultado.getObject(i);
+
+                if (valor instanceof java.util.Date){
+                    Timestamp timestamp = (Timestamp) valor;
+                    valor = timestamp.toLocalDateTime().toLocalDate().toString();
+                }
+
+
+                linha.add(valor);
+            }
+
+            dados.add(linha);
+
+        }
+
+        //Definindo nomes mais compactos para a exibição
+        ArrayList<String> nomes = new ArrayList<>();
+        nomes.add("ID");
+        nomes.add("NOME");
+        nomes.add("CATEGORIA");
+        nomes.add("ESTOQUE");
+        nomes.add("PREÇO");
+        nomes.add("VALIDADE");
+        nomes.add("FABRICAÇÃO");
+        nomes.add("PESO/U");
+        nomes.add("MARCA");
+        nomes.add("PAÍS");
+
+        //Exibindo o título
+        for(String nome : nomes){
+            System.out.printf("%-10s | ", nome);
+        }
+
+        //Pulando uma linha para mostrar os dados
+        System.out.println();
+        Estilo.l(129);
+
+        //Exibindo todos os dados
+        for(ArrayList<Object> l : dados){
+
+            for(Object d : l){
+                System.out.printf("%-10s | ", d);
+            }
+            
+            System.out.println();
         }
 
 
         //Fechando as conexões
         comando.close();
         resultado.close();
-        con.close();*/
+        con.close();
 
 
     }
@@ -182,4 +191,39 @@ public class Crud extends Conexao{
         con.close();*/
     
     }
+
+    //Método que pega todos os valores das colunas de uma tabela
+    private ArrayList<Object> getValorColunas(Object obj) {
+
+        ArrayList<Object> valorColunas = new ArrayList<>();
+
+        //Guardando os atributos declarados
+        Field[] campos = obj.getClass().getDeclaredFields();
+        for (Field campo : campos){
+            campo.setAccessible(true);
+            try{
+                valorColunas.add(campo.get(obj));
+            }catch(IllegalAccessException e){
+                System.out.println("Erro: " + e.toString());
+            }  
+        }
+
+        return valorColunas;
+    }
+
+    //Método que retorna todos os nomes das colunas de uma tabela
+    private ArrayList<String> getNomeColunas(Object obj) {
+        
+        ArrayList<String> nomeColunas = new ArrayList<>();
+
+        //Guardando os atributos declarados
+        Field[] campos = obj.getClass().getDeclaredFields();
+        for (Field campo : campos){
+            campo.setAccessible(true);
+            nomeColunas.add(campo.getName());
+        }
+        
+        return nomeColunas;
+    }
+
 }

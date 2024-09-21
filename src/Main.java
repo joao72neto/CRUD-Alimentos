@@ -1,40 +1,43 @@
 import java.sql.SQLException;
 
 import java.sql.Date;
-import entidades.Alimentos;
-import entidades.Estilo;
+import entidades.*;
 
 public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
-        Estilo.l();
-        System.out.printf("%12sCRUD de Alimentos\n", "");
-        Estilo.l();
+        Estilo.l(129);
+        System.out.printf("%55sCRUD de Alimentos\n", "");
+        Estilo.l(129);
 
         //Guardando as datas
-        Date fabriacao = Date.valueOf("2030-12-12");
-        Date validade = Date.valueOf("2024-12-12");
+        Date fabriacao = Date.valueOf("2035-08-12");
+        Date validade = Date.valueOf("2024-01-20");
 
-        //Inserindo os dados para a tabela de alimentos
-        Alimentos prod = new Alimentos("Maçã", 
-                                       "fruta", 
-                                        100, 
-                                        2.3, 
-                                        validade, 
-                                        fabriacao,
-                                        3, 
-                                        "apple", 
-                                        "Brasil",
-                                        "23423423423");
-        
+        //Criando uma tabela de alimentos
+        Alimentos prod = new Alimentos();
 
-        //Cadastrando os dados inseridos
-        prod.cadastrar(prod);
+        //Inserindo os dados na tabela
+        prod.setAlm_nome("Melão");
+        prod.setAlm_categoria("Fruta");
+        prod.setAlm_codigo_barras("123124124124");
+        prod.setAlm_data_validade(validade);
+        prod.setAlm_data_fabricacao(fabriacao);
+        prod.setAlm_pais_origem("Brasil");
+        prod.setAlm_peso_por_unidade(5);
+        prod.setAlm_quantidade_estoque(20);
+        prod.setAlm_marca("Do jão");
+        prod.setAlm_preco(1.2);
 
-        //Visualizando os dados cadastrados
-        prod.visualizar();
-      
+        //Instanciando o CRUD
+        Crud c = new Crud();
+
+    
+        //Cadastrando a tabela de alimentos no banco de dados
+        c.cadastrar(prod);
+        c.visualizar(prod);
+             
        
     }
 }
