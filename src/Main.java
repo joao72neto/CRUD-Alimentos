@@ -9,72 +9,17 @@ public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
-        //Variáveis
-        int TAM = 57;
-
-        //Título
-        Estilo.l(TAM);
-        System.out.println(Estilo.centralizar("CRUD de Alimentos", TAM));
-        Estilo.l(TAM);
-
-
-        //Pedindo para o usuário inseriri os valores na tabela alimentos (apresentação)
-        Scanner sc = new Scanner(System.in);
-        Alimentos al = new Alimentos();
-
-
-        System.out.print("Pressione qualquer tecla para adicionar dados a tabela...");
-        sc.nextLine();
-
-        //Limpando a tela do terminal
-        Estilo.limapTela();
-
-        //Pegando os dados do usuário
-        TAM = 30;
-        Estilo.l(TAM);
-        System.out.print("ID: ");
-        al.setAlm_id(sc.nextInt());
-        sc.nextLine();
-
-        System.out.print("NOME: ");
-        al.setAlm_nome(sc.nextLine());
-
-        System.out.print("CATEGORIA: ");
-        al.setAlm_categoria(sc.nextLine());
-
-        System.out.print("QUANTIDADE ESTOQUE:");
-        al.setAlm_quantidade_estoque(sc.nextDouble()); 
-
-        System.out.print("PREÇO: ");
-        al.setAlm_preco(sc.nextDouble());
-        sc.nextLine();
-
-        System.out.print("DATA DE VALIDADE: ");
-        String validade = sc.nextLine();
-        Date validade_formatada = Date.valueOf(validade);
-        al.setAlm_data_validade(validade_formatada);
-
-
-        System.out.print("DATA DE FABRICAÇÃO: ");
-        String fabricacao = sc.nextLine();
-        Date fabricacao_formatada = Date.valueOf(fabricacao);
-        al.setAlm_data_fabricacao(fabricacao_formatada);
-
-        System.out.print("PESO POR UNIDADE: ");
-        al.setAlm_peso_por_unidade(sc.nextDouble());
-        sc.nextLine();
-
-        System.out.print("MARCA: ");
-        al.setAlm_marca(sc.nextLine());
-
-        System.out.print("PAÍS ORIGEM: ");
-        al.setAlm_pais_origem(sc.nextLine());
-
-        System.out.print("CÓDIGO DE BARRAS: ");
-        al.setAlm_codigo_barras(sc.nextLine());
-        
         //Variáveis que permite sair do loop while
         boolean rodar = true; 
+
+        //Variáveis para ler os inputs do usuário
+        Scanner sc = new Scanner(System.in);
+
+        //tabela de alimentos
+        Alimentos al = new Alimentos();
+
+        //Tmanho que as strings precisam estar centralizadas
+        int TAM = 0;
 
         while (rodar){
 
@@ -117,10 +62,59 @@ public class Main {
             switch (escolha) {
                 case 1: //Cadastrar 
 
+                    //Limpando a tela do terminal
+                    Estilo.limapTela();
+
+                    //Pegando os dados do usuário
+                    TAM = 30;
+                    Estilo.l(TAM);
+                    System.out.print("ID: ");
+                    al.setAlm_id(sc.nextInt());
+                    sc.nextLine();
+
+                    System.out.print("NOME: ");
+                    al.setAlm_nome(sc.nextLine());
+
+                    System.out.print("CATEGORIA: ");
+                    al.setAlm_categoria(sc.nextLine());
+
+                    System.out.print("QUANTIDADE ESTOQUE:");
+                    al.setAlm_quantidade_estoque(sc.nextDouble()); 
+
+                    System.out.print("PREÇO: ");
+                    al.setAlm_preco(sc.nextDouble());
+                    sc.nextLine();
+
+                    System.out.print("DATA DE VALIDADE: ");
+                    String validade = sc.nextLine();
+                    Date validade_formatada = Date.valueOf(validade);
+                    al.setAlm_data_validade(validade_formatada);
+
+
+                    System.out.print("DATA DE FABRICAÇÃO: ");
+                    String fabricacao = sc.nextLine();
+                    Date fabricacao_formatada = Date.valueOf(fabricacao);
+                    al.setAlm_data_fabricacao(fabricacao_formatada);
+
+                    System.out.print("PESO POR UNIDADE: ");
+                    al.setAlm_peso_por_unidade(sc.nextDouble());
+                    sc.nextLine();
+
+                    System.out.print("MARCA: ");
+                    al.setAlm_marca(sc.nextLine());
+
+                    System.out.print("PAÍS ORIGEM: ");
+                    al.setAlm_pais_origem(sc.nextLine());
+
+                    System.out.print("CÓDIGO DE BARRAS: ");
+                    al.setAlm_codigo_barras(sc.nextLine());
+
+
                     Estilo.limapTela();
                     c.cadastrar(al);
 
                     //Feedback para o usuário
+                    TAM = 40;
                     Estilo.l(TAM);
                     System.out.println(Estilo.centralizar("Alimento cadastrado com sucesso!", TAM));
                     Estilo.l(TAM);
@@ -129,6 +123,7 @@ public class Main {
                     break;
 
                 case 2:// Visualizar
+                    TAM = 142;
 
                     //Chamando o cabeçalho personalizado
                     cabecalho();
@@ -141,12 +136,14 @@ public class Main {
             
                 case 3: //Atualizar
                 
+                    TAM = 142;
+
                     //Chamando o cabeçalho personalizado
                     cabecalho();
                     c.visualizar(al);
 
                     //Pedindo informações necessárias para a atualização dos dados
-                    Estilo.l(142);
+                    Estilo.l(TAM);
                     System.out.print("COLUNA: ");
                     String col = sc.nextLine();
 
@@ -160,6 +157,7 @@ public class Main {
                     c.atualizar(al, col, valor, id);
 
                     //Fedback para o usuário
+                    TAM = 40;
                     Estilo.limapTela();
                     Estilo.l(TAM);
                     System.out.println(Estilo.centralizar("Dado atualizado com sucesso!", TAM));
@@ -168,10 +166,11 @@ public class Main {
                     System.out.print("Pressione qualque tecla ver os dados...");
                     sc.nextLine();
 
+                    TAM = 142;
                     Estilo.limapTela();
                     cabecalho();
                     c.visualizar(al);
-                    Estilo.l(142);
+                    Estilo.l(TAM);
 
                     System.out.print("Pressione qualque tecla para voltar...");
                     sc.nextLine();
@@ -179,12 +178,14 @@ public class Main {
 
                 case 4: //Deletar
 
+                    TAM = 142;
+
                     //Chamando o cabeçalho personalizado
                     cabecalho();
                     c.visualizar(al);
 
                     //Pedindo informações necessárias para a atualização dos dados
-                    Estilo.l(142);
+                    Estilo.l(TAM);
 
                     System.out.print("ID: ");
                     id = sc.nextInt(); sc.nextLine();
@@ -193,6 +194,7 @@ public class Main {
                     c.deletar(al, id);
 
                     //Fedback para o usuário
+                    TAM = 40;
                     Estilo.limapTela();
                     Estilo.l(TAM);
                     System.out.println(Estilo.centralizar("Dado deletado com sucesso!", TAM));
@@ -201,10 +203,11 @@ public class Main {
                     System.out.print("Pressione qualque tecla ver os dados...");
                     sc.nextLine();
 
+                    TAM = 142;
                     Estilo.limapTela();
                     cabecalho();
                     c.visualizar(al);
-                    Estilo.l(142);
+                    Estilo.l(TAM);
 
                     System.out.print("Pressione qualque tecla para voltar...");
                     sc.nextLine();
@@ -215,6 +218,9 @@ public class Main {
                     break;
 
                 default:
+
+                    TAM = 40;
+
                     Estilo.limapTela();
                     Estilo.l(TAM);
                     System.out.println(Estilo.centralizar("Opção inválida", TAM));
