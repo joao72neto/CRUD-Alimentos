@@ -23,7 +23,7 @@ public class Main {
         Alimentos al = new Alimentos();
 
 
-       /*System.out.print("Pressione qualquer tecla para adicionar dados a tabela...");
+        System.out.print("Pressione qualquer tecla para adicionar dados a tabela...");
         sc.nextLine();
 
         //Limpando a tela do terminal
@@ -71,7 +71,7 @@ public class Main {
         al.setAlm_pais_origem(sc.nextLine());
 
         System.out.print("CÓDIGO DE BARRAS: ");
-        al.setAlm_codigo_barras(sc.nextLine());*/
+        al.setAlm_codigo_barras(sc.nextLine());
         
         //Variáveis que permite sair do loop while
         boolean rodar = true; 
@@ -112,6 +112,8 @@ public class Main {
             Crud c = new Crud();
             
             //Verificando a escolha do usuário
+            int id=0;
+
             switch (escolha) {
                 case 1: //Cadastrar 
 
@@ -152,7 +154,7 @@ public class Main {
                     Object valor = sc.nextLine();
 
                     System.out.print("ID: ");
-                    int id = sc.nextInt(); sc.nextLine();
+                    id = sc.nextInt(); sc.nextLine();
 
                     //Atualizando os dados
                     c.atualizar(al, col, valor, id);
@@ -160,7 +162,7 @@ public class Main {
                     //Fedback para o usuário
                     Estilo.limapTela();
                     Estilo.l(TAM);
-                    System.out.println(Estilo.centralizar("Dados atualizados com sucesso!", TAM));
+                    System.out.println(Estilo.centralizar("Dado atualizado com sucesso!", TAM));
                     Estilo.l(TAM);
 
                     System.out.print("Pressione qualque tecla ver os dados...");
@@ -179,8 +181,31 @@ public class Main {
 
                     //Chamando o cabeçalho personalizado
                     cabecalho();
+                    c.visualizar(al);
 
-                    System.out.println("Nada aqui");
+                    //Pedindo informações necessárias para a atualização dos dados
+                    Estilo.l(142);
+
+                    System.out.print("ID: ");
+                    id = sc.nextInt(); sc.nextLine();
+
+                    //Atualizando os dados
+                    c.deletar(al, id);
+
+                    //Fedback para o usuário
+                    Estilo.limapTela();
+                    Estilo.l(TAM);
+                    System.out.println(Estilo.centralizar("Dado deletado com sucesso!", TAM));
+                    Estilo.l(TAM);
+
+                    System.out.print("Pressione qualque tecla ver os dados...");
+                    sc.nextLine();
+
+                    Estilo.limapTela();
+                    cabecalho();
+                    c.visualizar(al);
+                    Estilo.l(142);
+
                     System.out.print("Pressione qualque tecla para voltar...");
                     sc.nextLine();
                     break;
