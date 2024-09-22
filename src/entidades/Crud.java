@@ -3,7 +3,6 @@ package entidades;
 import java.sql.*;
 import java.util.ArrayList;
 import java.lang.reflect.Field;
-import java.text.SimpleDateFormat;
 
 public class Crud extends Conexao{
     
@@ -152,7 +151,7 @@ public class Crud extends Conexao{
     //Modificar um dado existente
     public void atualizar(String coluna, Object valor, int id) throws ClassNotFoundException, SQLException{
 
-       /* Connection con = getConexao();
+       /*Connection con = getConexao();
 
         //Preparando o comando SQL
         String sql = String.format("update %s set %s = %s where %s = %d", 
@@ -175,12 +174,14 @@ public class Crud extends Conexao{
     }
 
     //Deletar um dados específico
-    public void deletar(int id) throws ClassNotFoundException, SQLException{
+    public void deletar(Tabelas tabela, String coluna, int id) throws ClassNotFoundException, SQLException{
 
-       /*Connection con = getConexao();
+       Connection con = getConexao();
+        
+        //Preparando o comando SQL
+        String sql = String.format("delete from %s where %s = %d",tabela.getNomeTabela() , coluna, id);
 
         //Preparando o comando SQL
-        String sql = String.format("delete from %s where %s = %d", tabela, tbl_id, id);
         PreparedStatement comando = con.prepareStatement(sql);
 
         //Executando a instruções SQL
@@ -188,7 +189,7 @@ public class Crud extends Conexao{
 
         //Fechando as conexões
         comando.close();
-        con.close();*/
+        con.close();
     
     }
 
