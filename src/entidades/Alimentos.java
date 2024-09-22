@@ -5,6 +5,7 @@ import java.sql.Date;
 public class Alimentos implements Tabelas{
 
     //Atributos
+    private int alm_id;
     private String alm_nome;
     private String alm_categoria;
     private double alm_quantidade_estoque;
@@ -22,12 +23,13 @@ public class Alimentos implements Tabelas{
     }
 
 
-    public Alimentos(String alm_nome, String alm_categoria, 
+    public Alimentos(int alm_id, String alm_nome, String alm_categoria, 
                     double alm_quantidade_estoque, double alm_preco,
                     Date alm_data_validade, Date alm_data_fabricacao, 
                     double alm_peso_por_unidade, String alm_marca,
                     String alm_pais_origem, String alm_codigo_barras) {
         
+        this.alm_id = alm_id;
         this.alm_nome = alm_nome;
         this.alm_categoria = alm_categoria;
         this.alm_quantidade_estoque = alm_quantidade_estoque;
@@ -51,6 +53,16 @@ public class Alimentos implements Tabelas{
 
     
     //Getters and Setters
+    public void setAlm_id(int alm_id) {
+        this.alm_id = alm_id;
+    }
+
+    
+    public int getAlm_id() {
+        return alm_id;
+    }
+
+
     public String getAlm_nome() {
         return alm_nome;
     }

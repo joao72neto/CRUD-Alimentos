@@ -18,20 +18,18 @@ public class Crud extends Conexao{
         String nomeTabela = tabela.getNomeTabela();
 
         //Inserindo dados de forma dinâmica
-        StringBuilder insert = new StringBuilder("insert into " + nomeTabela + " (");
+        StringBuilder insert = new StringBuilder("insert into " + nomeTabela + " values (");
 
-        //Colocando o nome das colunas
+        /*//Colocando o nome das colunas
         for(int i=0; i < nomeColunas.size(); i++){
             insert.append(nomeColunas.get(i));
 
             if(i < nomeColunas.size()-1){
                 insert.append(", ");
             }
-        }
+        }*/
 
         //adicionando os valores a serem inseridos
-        insert.append(") values (");
-
         for(int i=0; i < valorColunas.size(); i++){
 
             //Adicionando os valores
@@ -85,10 +83,10 @@ public class Crud extends Conexao{
         ArrayList<ArrayList<Object>> dados = new ArrayList<>();
         ArrayList<String> nomeColunas = getNomeColunas(tabela);
 
+        //Organizando os dados em uma matriz
         while (resultado.next()) {
-            //Guardando temporariamento os dados
+            
             ArrayList<Object> linha = new ArrayList<>();
-
 
             for(int i=1; i <= nomeColunas.size(); i++){
 
@@ -119,6 +117,7 @@ public class Crud extends Conexao{
         nomes.add("PESO/U");
         nomes.add("MARCA");
         nomes.add("PAÍS");
+        nomes.add("CÓD BARRAS  ");
 
         //Exibindo o título
         for(String nome : nomes){
@@ -149,16 +148,16 @@ public class Crud extends Conexao{
     }
 
     //Modificar um dado existente
-    public void atualizar(String coluna, Object valor, int id) throws ClassNotFoundException, SQLException{
+    public void atualizar(Tabelas tabela, String coluna, Object valor, int id) throws ClassNotFoundException, SQLException{
 
-       /*Connection con = getConexao();
+       Connection con = getConexao();
 
         //Preparando o comando SQL
-        String sql = String.format("update %s set %s = %s where %s = %d", 
-                                    tabela,
+        String sql = String.format("update %s set %s = '%s' where %s = %d", 
+                                    tabela.getNomeTabela(),
                                     coluna, 
                                     valor,
-                                    tbl_id, 
+                                    getNomeColunas(tabela).get(0), 
                                     id);
 
         PreparedStatement comando = con.prepareStatement(sql);
@@ -169,17 +168,18 @@ public class Crud extends Conexao{
 
         //Fechando as conexões
         comando.close();
-        con.close();*/
+        con.close();
 
     }
 
     //Deletar um dados específico
-    public void deletar(Tabelas tabela, String coluna, int id) throws ClassNotFoundException, SQLException{
+    public void deletar(Tabelas tabela, int id) throws ClassNotFoundException, SQLException{
 
-       Connection con = getConexao();
-        
+        //Estabelecendo a conexão com o BD
+        Connection con = getConexao();
+
         //Preparando o comando SQL
-        String sql = String.format("delete from %s where %s = %d",tabela.getNomeTabela() , coluna, id);
+        String sql = String.format("delete from %s where %s = %d",tabela.getNomeTabela() ,getNomeColunas(tabela).get(0), id);
 
         //Preparando o comando SQL
         PreparedStatement comando = con.prepareStatement(sql);

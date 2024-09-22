@@ -35,8 +35,8 @@ public class Main {
 
     
         //Cadastrando a tabela de alimentos no banco de dados
-        c.cadastrar(prod);
         c.visualizar(prod);
+        //c.atualizar(prod, "alm_nome", "Banana", 3);
              
        
     }
