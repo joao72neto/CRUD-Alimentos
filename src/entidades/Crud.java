@@ -105,28 +105,11 @@ public class Crud extends Conexao{
 
         }
 
-        //Definindo nomes mais compactos para a exibição
-        ArrayList<String> nomes = new ArrayList<>();
-        nomes.add("ID");
-        nomes.add("NOME");
-        nomes.add("CATEGORIA");
-        nomes.add("ESTOQUE");
-        nomes.add("PREÇO");
-        nomes.add("VALIDADE");
-        nomes.add("FABRICAÇÃO");
-        nomes.add("PESO/U");
-        nomes.add("MARCA");
-        nomes.add("PAÍS");
-        nomes.add("CÓD BARRAS  ");
-
+        /* 
         //Exibindo o título
-        for(String nome : nomes){
+        for(String nome : nomeColunas){
             System.out.printf("%-10s | ", nome);
-        }
-
-        //Pulando uma linha para mostrar os dados
-        System.out.println();
-        Estilo.l(129);
+        }*/
 
         //Exibindo todos os dados
         for(ArrayList<Object> l : dados){
