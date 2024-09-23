@@ -1,5 +1,4 @@
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.sql.Date;
@@ -126,7 +125,7 @@ public class Main {
                     TAM = 142;
 
                     //Chamando o cabeçalho personalizado
-                    cabecalho();
+                    Estilo.cabecalho();
 
                     c.visualizar(al);
                     Estilo.l(TAM);
@@ -139,7 +138,7 @@ public class Main {
                     TAM = 142;
 
                     //Chamando o cabeçalho personalizado
-                    cabecalho();
+                    Estilo.cabecalho();
                     c.visualizar(al);
 
                     //Pedindo informações necessárias para a atualização dos dados
@@ -157,22 +156,7 @@ public class Main {
                     c.atualizar(al, col, valor, id);
 
                     //Fedback para o usuário
-                    TAM = 40;
-                    Estilo.limapTela();
-                    Estilo.l(TAM);
-                    System.out.println(Estilo.centralizar("Dado atualizado com sucesso!", TAM));
-                    Estilo.l(TAM);
-
-                    System.out.print("Pressione qualque tecla ver os dados...");
-                    sc.nextLine();
-
-                    TAM = 142;
-                    Estilo.limapTela();
-                    cabecalho();
-                    c.visualizar(al);
-                    Estilo.l(TAM);
-
-                    System.out.print("Pressione qualque tecla para voltar...");
+                    Estilo.feedback("Dado atualizado com sucesso", sc, al, c);
                     sc.nextLine();
                     break;
 
@@ -181,7 +165,7 @@ public class Main {
                     TAM = 142;
 
                     //Chamando o cabeçalho personalizado
-                    cabecalho();
+                    Estilo.cabecalho();
                     c.visualizar(al);
 
                     //Pedindo informações necessárias para a atualização dos dados
@@ -194,23 +178,7 @@ public class Main {
                     c.deletar(al, id);
 
                     //Fedback para o usuário
-                    TAM = 40;
-                    Estilo.limapTela();
-                    Estilo.l(TAM);
-                    System.out.println(Estilo.centralizar("Dado deletado com sucesso!", TAM));
-                    Estilo.l(TAM);
-
-                    System.out.print("Pressione qualque tecla ver os dados...");
-                    sc.nextLine();
-
-                    TAM = 142;
-                    Estilo.limapTela();
-                    cabecalho();
-                    c.visualizar(al);
-                    Estilo.l(TAM);
-
-                    System.out.print("Pressione qualque tecla para voltar...");
-                    sc.nextLine();
+                    Estilo.feedback("Dado deletado com sucesso!", sc, al, c);
                     break;
 
                 case 5:
@@ -234,40 +202,6 @@ public class Main {
         Estilo.limapTela();
         Estilo.l(TAM);
         System.out.println(Estilo.centralizar("Fim do CRUD", TAM));
-        Estilo.l(TAM);
-    }
-
-    //Cabeçalho personalizado criado para exibição dos dados
-    public static void cabecalho(){
-
-        int TAM = 142;
-
-        Estilo.limapTela();
-
-        //Personalianco o cabeçalho
-        Estilo.l(TAM);
-        System.out.println(Estilo.centralizar("Alimentos", TAM));
-        Estilo.l(TAM);
-
-        ArrayList<String> nomes = new ArrayList<>();
-        nomes.add("ID");
-        nomes.add("NOME");
-        nomes.add("CATEGORIA");
-        nomes.add("ESTOQUE");
-        nomes.add("PREÇO");
-        nomes.add("VALIDADE");
-        nomes.add("FABRICAÇÃO");
-        nomes.add("PESO/U");
-        nomes.add("MARCA");
-        nomes.add("PAÍS");
-        nomes.add("CÓD BARRAS");
-
-        //Exibindo o título
-        for(String nome : nomes){
-            System.out.printf("%-10s | ", nome);
-        }
-        System.out.println();
-
         Estilo.l(TAM);
     }
 }
