@@ -117,7 +117,7 @@ public class Main {
                     Estilo.l(TAM);
                     System.out.println(Estilo.centralizar("Alimento cadastrado com sucesso!", TAM));
                     Estilo.l(TAM);
-                    System.out.print("Pressione qualque tecla para voltar...");
+                    System.out.print("Pressione 'Enter' para voltar...");
                     sc.nextLine();
                     break;
 
@@ -129,7 +129,7 @@ public class Main {
 
                     c.visualizar(al);
                     Estilo.l(TAM);
-                    System.out.print("Pressione qualque tecla para voltar...");
+                    System.out.print("Pressione 'Enter' para voltar...");
                     sc.nextLine();
                     break;
             
@@ -193,7 +193,7 @@ public class Main {
                     Estilo.l(TAM);
                     System.out.println(Estilo.centralizar("Opção inválida", TAM));
                     Estilo.l(TAM);
-                    System.out.print("Pressione qualque tecla para voltar...");
+                    System.out.print("Pressione 'Enter' para voltar...");
                     sc.nextLine();
                     break;
             }

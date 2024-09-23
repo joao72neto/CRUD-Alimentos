@@ -81,7 +81,7 @@ public class Estilo {
         System.out.println(Estilo.centralizar("Dado deletado com sucesso!", TAM));
         Estilo.l(TAM);
 
-        System.out.print("Pressione qualque tecla ver os dados...");
+        System.out.print("Pressione 'Enter' ver os dados...");
         sc.nextLine();
 
         TAM = 142;
@@ -98,7 +98,7 @@ public class Estilo {
         
         Estilo.l(TAM);
 
-        System.out.print("Pressione qualque tecla para voltar...");
+        System.out.print("Pressione 'Enter' para voltar...");
         sc.nextLine();
     }
 }   
