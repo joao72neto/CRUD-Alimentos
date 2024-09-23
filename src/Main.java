@@ -162,23 +162,35 @@ public class Main {
 
                 case 4: //Deletar
 
-                    TAM = 142;
+                    //Consistendo o valor do id
+                    while (true) {
+                        
+                   
+                        TAM = 142;
 
-                    //Chamando o cabeçalho personalizado
-                    Estilo.cabecalho();
-                    c.visualizar(al);
+                        //Chamando o cabeçalho personalizado
+                        Estilo.cabecalho();
+                        c.visualizar(al);
 
-                    //Pedindo informações necessárias para a atualização dos dados
-                    Estilo.l(TAM);
+                        //Pedindo informações necessárias para a atualização dos dados
+                        Estilo.l(TAM);
 
-                    System.out.print("ID: ");
-                    id = sc.nextInt(); sc.nextLine();
+                        System.out.print("ID: ");
+                        id = TratarErros.pegarInteiro(sc.nextLine());
+
+                        if (id == 0){
+                            continue;
+                        }
+
+                        break;
+                    }
 
                     //Atualizando os dados
                     c.deletar(al, id);
 
                     //Fedback para o usuário
                     Estilo.feedback("Dado deletado com sucesso!", sc, al, c);
+
                     break;
 
                 case 5:
