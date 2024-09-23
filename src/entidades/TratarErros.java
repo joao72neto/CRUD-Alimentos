@@ -19,7 +19,7 @@ public class TratarErros {
             Estilo.l(TAM);
             System.out.println(Estilo.centralizar("Valor Inválido", TAM));
             Estilo.l(TAM);
-            System.out.print("Pressione 'Enter' para continuar");
+            System.out.print("Pressione 'Enter' para continuar...");
             sc.nextLine();
             
     }

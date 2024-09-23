@@ -52,7 +52,7 @@ public class Main {
             //Limpando o buffer 
             sc.nextLine();
 
-            //Isntanciando o crud e a tabela
+            //Instanciando o crud
             Crud c = new Crud();
             
             //Verificando a escolha do usuário
@@ -156,7 +156,7 @@ public class Main {
                     c.atualizar(al, col, valor, id);
 
                     //Fedback para o usuário
-                    Estilo.feedback("Dado atualizado com sucesso", sc, al, c);
+                    Estilo.feedback("Dado atualizado com sucesso!", sc, al, c);
                     sc.nextLine();
                     break;
 

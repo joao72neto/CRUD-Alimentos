@@ -13,7 +13,7 @@ public class Crud extends Conexao{
         Connection con = getConexao();
         
         //Pegando iformações sobre a tabela
-        ArrayList<String> nomeColunas = getNomeColunas(tabela);
+        //ArrayList<String> nomeColunas = getNomeColunas(tabela);
         ArrayList<Object> valorColunas = getValorColunas(tabela);
         String nomeTabela = tabela.getNomeTabela();
 
