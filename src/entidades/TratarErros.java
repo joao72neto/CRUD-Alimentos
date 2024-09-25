@@ -13,11 +13,11 @@ public class TratarErros {
 
 
     //Função que exibe uma msg de valor inválido
-    private static void valorInvalido(String msg, Scanner sc, int TAM){
+    public static void valorInvalido(String msg, Scanner sc, int TAM){
             
             Estilo.limapTela();
             Estilo.l(TAM);
-            System.out.println(Estilo.centralizar("Valor Inválido", TAM));
+            System.out.println(Estilo.centralizar(msg, TAM));
             Estilo.l(TAM);
             System.out.print("Pressione 'Enter' para continuar...");
             sc.nextLine();
