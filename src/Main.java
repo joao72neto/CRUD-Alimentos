@@ -3,6 +3,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.sql.Date;
 import entidades.*;
+import oracle.jdbc.internal.ObjectData;
+
+import java.util.ArrayList;
 
 public class Main {
 
@@ -64,49 +67,55 @@ public class Main {
                     //Limpando a tela do terminal
                     Estilo.limapTela();
 
-                    //Pegando os dados do usuário
-                    TAM = 30;
-                    Estilo.l(TAM);
-                    System.out.print("ID: ");
-                    al.setAlm_id(sc.nextInt());
-                    sc.nextLine();
 
-                    System.out.print("NOME: ");
-                    al.setAlm_nome(sc.nextLine());
+                    while (true){
 
-                    System.out.print("CATEGORIA: ");
-                    al.setAlm_categoria(sc.nextLine());
+                        //Pegando os dados do usuário
+                        TAM = 30;
+                        Estilo.l(TAM);
+                        System.out.print("ID: ");
+                        int id_tabela = TratarErros.pegarInteiro(sc.nextLine());
+                        al.setAlm_id(id_tabela);
 
-                    System.out.print("QUANTIDADE ESTOQUE:");
-                    al.setAlm_quantidade_estoque(sc.nextDouble()); 
+                        if (id_tabela == 0){continue;}
 
-                    System.out.print("PREÇO: ");
-                    al.setAlm_preco(sc.nextDouble());
-                    sc.nextLine();
+                        System.out.print("NOME: ");
+                        al.setAlm_nome(sc.nextLine());
 
-                    System.out.print("DATA DE VALIDADE: ");
-                    String validade = sc.nextLine();
-                    Date validade_formatada = Date.valueOf(validade);
-                    al.setAlm_data_validade(validade_formatada);
+                        System.out.print("CATEGORIA: ");
+                        al.setAlm_categoria(sc.nextLine());
+
+                        System.out.print("QUANTIDADE ESTOQUE:");
+                        al.setAlm_quantidade_estoque(sc.nextDouble()); 
+
+                        System.out.print("PREÇO: ");
+                        al.setAlm_preco(sc.nextDouble());
+                        sc.nextLine();
+
+                        System.out.print("DATA DE VALIDADE: ");
+                        String validade = sc.nextLine();
+                        Date validade_formatada = Date.valueOf(validade);
+                        al.setAlm_data_validade(validade_formatada);
 
 
-                    System.out.print("DATA DE FABRICAÇÃO: ");
-                    String fabricacao = sc.nextLine();
-                    Date fabricacao_formatada = Date.valueOf(fabricacao);
-                    al.setAlm_data_fabricacao(fabricacao_formatada);
+                        System.out.print("DATA DE FABRICAÇÃO: ");
+                        String fabricacao = sc.nextLine();
+                        Date fabricacao_formatada = Date.valueOf(fabricacao);
+                        al.setAlm_data_fabricacao(fabricacao_formatada);
 
-                    System.out.print("PESO POR UNIDADE: ");
-                    al.setAlm_peso_por_unidade(sc.nextDouble());
-                    sc.nextLine();
+                        System.out.print("PESO POR UNIDADE: ");
+                        al.setAlm_peso_por_unidade(sc.nextDouble());
+                        sc.nextLine();
 
-                    System.out.print("MARCA: ");
-                    al.setAlm_marca(sc.nextLine());
+                        System.out.print("MARCA: ");
+                        al.setAlm_marca(sc.nextLine());
 
-                    System.out.print("PAÍS ORIGEM: ");
-                    al.setAlm_pais_origem(sc.nextLine());
+                        System.out.print("PAÍS ORIGEM: ");
+                        al.setAlm_pais_origem(sc.nextLine());
 
-                    System.out.print("CÓDIGO DE BARRAS: ");
-                    al.setAlm_codigo_barras(sc.nextLine());
+                        System.out.print("CÓDIGO DE BARRAS: ");
+                        al.setAlm_codigo_barras(sc.nextLine());
+                    }
 
 
                     Estilo.limapTela();
@@ -215,5 +224,59 @@ public class Main {
         Estilo.l(TAM);
         System.out.println(Estilo.centralizar("Fim do CRUD", TAM));
         Estilo.l(TAM);
+    }
+
+    //Função que pega todos os dados para cadastrar um alimento
+    public static void pegar_dados_cadastrar(Alimentos al, Scanner sc){
+        
+        //Definindo o nome das colunas
+        while (true){
+
+            //Pegando os dados do usuário
+            int TAM = 30;
+            Estilo.l(TAM);
+            System.out.print("ID: ");
+            int id_tabela = TratarErros.pegarInteiro(sc.nextLine());
+            al.setAlm_id(id_tabela);
+
+            if (id_tabela == 0){continue;}
+
+            System.out.print("NOME: ");
+            al.setAlm_nome(sc.nextLine());
+
+            System.out.print("CATEGORIA: ");
+            al.setAlm_categoria(sc.nextLine());
+
+            System.out.print("QUANTIDADE ESTOQUE:");
+            al.setAlm_quantidade_estoque(sc.nextDouble()); 
+
+            System.out.print("PREÇO: ");
+            al.setAlm_preco(sc.nextDouble());
+            sc.nextLine();
+
+            System.out.print("DATA DE VALIDADE: ");
+            String validade = sc.nextLine();
+            Date validade_formatada = Date.valueOf(validade);
+            al.setAlm_data_validade(validade_formatada);
+
+
+            System.out.print("DATA DE FABRICAÇÃO: ");
+            String fabricacao = sc.nextLine();
+            Date fabricacao_formatada = Date.valueOf(fabricacao);
+            al.setAlm_data_fabricacao(fabricacao_formatada);
+
+            System.out.print("PESO POR UNIDADE: ");
+            al.setAlm_peso_por_unidade(sc.nextDouble());
+            sc.nextLine();
+
+            System.out.print("MARCA: ");
+            al.setAlm_marca(sc.nextLine());
+
+            System.out.print("PAÍS ORIGEM: ");
+            al.setAlm_pais_origem(sc.nextLine());
+
+            System.out.print("CÓDIGO DE BARRAS: ");
+            al.setAlm_codigo_barras(sc.nextLine());
+        }
     }
 }

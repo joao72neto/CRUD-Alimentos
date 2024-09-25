@@ -51,6 +51,21 @@ public class Estilo {
         Estilo.l(TAM);
 
         ArrayList<String> nomes = new ArrayList<>();
+        nomes = nomes_personalizados_colunas();
+
+        //Exibindo o título
+        for(String nome : nomes){
+            System.out.printf("%-10s | ", nome);
+        }
+        System.out.println();
+
+        Estilo.l(TAM);
+    }
+
+    //Função que define os nomes personalizados para as colunas
+    public static ArrayList<String> nomes_personalizados_colunas(){
+        ArrayList<String> nomes = new ArrayList<>();
+
         nomes.add("ID");
         nomes.add("NOME");
         nomes.add("CATEGORIA");
@@ -63,13 +78,7 @@ public class Estilo {
         nomes.add("PAÍS");
         nomes.add("CÓD BARRAS");
 
-        //Exibindo o título
-        for(String nome : nomes){
-            System.out.printf("%-10s | ", nome);
-        }
-        System.out.println();
-
-        Estilo.l(TAM);
+        return nomes;
     }
 
     //Função que retorna um feedback para o usuário
