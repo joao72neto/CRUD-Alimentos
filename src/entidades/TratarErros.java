@@ -14,7 +14,7 @@ public class TratarErros {
 
 
     //Função que exibe uma msg de valor inválido
-    private static void valorInvalido(String msg, Scanner sc, int TAM){
+    public static void valorInvalido(String msg, Scanner sc, int TAM){
             
             Estilo.limapTela();
             Estilo.l(TAM);
@@ -30,6 +30,25 @@ public class TratarErros {
         try {
             int v = Integer.parseInt(valor);
             return v;
+
+        } catch (NumberFormatException e) {
+            valorInvalido("O Valor não é inteiro", sc, TAM);
+            return 0;
+        }
+    }
+
+    //Função que lê apenas valores inteiros dentro de um intervalo
+    public static int pegarInteiro(String valor, int inicio, int fim){
+        
+        try {
+            int v = Integer.parseInt(valor);
+
+            if (v >= inicio && v <= fim){
+                return v;
+            }
+
+            valorInvalido("Valor fora do intervalo", sc, TAM);
+            return 0;
 
         } catch (NumberFormatException e) {
             valorInvalido("O Valor não é inteiro", sc, TAM);
@@ -63,6 +82,23 @@ public class TratarErros {
         } catch (Exception e) {
             valorInvalido("O valor não é uma data", sc, TAM);
             return null;
+        }
+    }
+
+    //Mostra todos os dados que já foram inseridos para cadastro
+    public static void dados_inseridos(ArrayList<Object> valores_inseridos, ArrayList<String> nomes_colunas, int TAM, Boolean limpar){
+        //Mostrando valores já adicionados
+        if (limpar){
+            Estilo.limapTela();
+        }
+
+        Estilo.l(TAM);
+
+        int i=0;
+
+        for(Object valor : valores_inseridos){
+            System.out.println(nomes_colunas.get(i) + ": " + valor);
+            i++;
         }
     }
 
@@ -106,7 +142,7 @@ public class TratarErros {
             if (nome.isEmpty()){
 
                 valorInvalido("Espaços não são válidos", sc, 40);
-                dados_inseridos(valores_inseridos, nomes_colunas);
+                dados_inseridos(valores_inseridos, nomes_colunas, TAM, true);
 
                 continue;
             }
@@ -125,7 +161,7 @@ public class TratarErros {
             if (cat.isEmpty()){
 
                 valorInvalido("Espaços não são válidos", sc, 40);
-                dados_inseridos(valores_inseridos, nomes_colunas);
+                dados_inseridos(valores_inseridos, nomes_colunas, TAM, true);
 
                 continue;
             }
@@ -144,7 +180,7 @@ public class TratarErros {
             if (qtd_estoque == 0){
 
                 //Exibindo os valores que já foram adicionados
-                dados_inseridos(valores_inseridos, nomes_colunas);
+                dados_inseridos(valores_inseridos, nomes_colunas, TAM, true);
 
                 continue;
             }
@@ -164,7 +200,7 @@ public class TratarErros {
             if (preco == 0){
 
                 //Mostrando valores já adicionados
-                dados_inseridos(valores_inseridos, nomes_colunas);
+                dados_inseridos(valores_inseridos, nomes_colunas, TAM, true);
 
                 continue;
             }
@@ -184,7 +220,7 @@ public class TratarErros {
             if (data == null){
 
                 //Mostrando valores já adicionados
-                dados_inseridos(valores_inseridos, nomes_colunas);
+                dados_inseridos(valores_inseridos, nomes_colunas, TAM, true);
 
                 continue;
             }
@@ -203,7 +239,7 @@ public class TratarErros {
             if(data == null){
 
                 //Mostrando valores já adicionados
-                dados_inseridos(valores_inseridos, nomes_colunas);
+                dados_inseridos(valores_inseridos, nomes_colunas, TAM, true);
 
                 continue;
             }
@@ -223,7 +259,7 @@ public class TratarErros {
             if(peso_por_unidade == 0){
 
                 //Mostrando valores já adicionados
-                dados_inseridos(valores_inseridos, nomes_colunas);
+                dados_inseridos(valores_inseridos, nomes_colunas, TAM, true);
 
                 continue;
             }
@@ -243,7 +279,7 @@ public class TratarErros {
             if (marca.isEmpty()){
 
                 valorInvalido("Espaços não são válidos", sc, 40);
-                dados_inseridos(valores_inseridos, nomes_colunas);
+                dados_inseridos(valores_inseridos, nomes_colunas, TAM, true);
 
                 continue;
             }
@@ -262,7 +298,7 @@ public class TratarErros {
             if (pais_origem.isEmpty()){
 
                 valorInvalido("Espaços não são válidos", sc, 40);
-                dados_inseridos(valores_inseridos, nomes_colunas);
+                dados_inseridos(valores_inseridos, nomes_colunas, TAM, true);
 
                 continue;
             }
@@ -281,30 +317,15 @@ public class TratarErros {
             if (codigo_barras.isEmpty()){
 
                 valorInvalido("Espaços não são válidos", sc, 40);
-                dados_inseridos(valores_inseridos, nomes_colunas);
+                dados_inseridos(valores_inseridos, nomes_colunas, TAM, true);
 
                 continue;
             }
             
             al.setAlm_codigo_barras(codigo_barras);
-            valores_inseridos.add(codigo_barras);
 
             break;
         }
 
-    }
-
-    //Mostra todos os dados que já foram inseridos para cadastro
-    private static void dados_inseridos(ArrayList<Object> valores_inseridos, ArrayList<String> nomes_colunas){
-        //Mostrando valores já adicionados
-        Estilo.limapTela();
-        Estilo.l(30);
-
-        int i=0;
-
-        for(Object valor : valores_inseridos){
-            System.out.println(nomes_colunas.get(i) + ": " + valor);
-            i++;
-        }
     }
 }

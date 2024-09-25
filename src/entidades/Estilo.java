@@ -4,9 +4,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import oracle.sql.BOOLEAN;
-import oracle.sql.BlobDBAccess;
-
 public class Estilo {
     
     //Funções que printam uma linha na tela
@@ -21,8 +18,12 @@ public class Estilo {
     //Função que centraliza um string
     public static String centralizar(String msg, int TAM){
 
-        int lateral = (TAM - msg.length()) / 2;
-        return " ".repeat(lateral) + msg;
+        if(TAM - msg.length() > 0){
+            int lateral = (TAM - msg.length()) / 2;
+            return " ".repeat(lateral) + msg;
+        }
+
+        return msg;
 
     }
 

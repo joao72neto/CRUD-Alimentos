@@ -2,6 +2,7 @@ import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import entidades.*;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -53,9 +54,6 @@ public class Main {
 
             //Instanciando o crud
             Crud c = new Crud();
-            
-            //Verificando a escolha do usuário
-            int id=0;
 
             switch (escolha) {
                 case 1: //Cadastrar 
@@ -95,32 +93,96 @@ public class Main {
             
                 case 3: //Atualizar
                 
+                    //valores inseridos
+                    ArrayList<Object> valores_inseridos = new ArrayList<>();
+                    ArrayList<String> nomes = new ArrayList<>();
+
+                    //Definindo os nomes
+                    nomes.add("COLUNA");
+                    nomes.add("NOVO VALOR");
+                    nomes.add("ID");
+
                     TAM = 142;
 
                     //Chamando o cabeçalho personalizado
                     Estilo.cabecalho(true);
                     c.visualizar(al);
 
-                    //Pedindo informações necessárias para a atualização dos dados
+                    //Varivaeis usadoas para o cadastro
+                    int col, id_atualizar;
+                    Object valor;
+
+                    //Consistindo o valor da coluna
                     Estilo.l(TAM);
-                    System.out.print("COLUNA: ");
-                    int col = sc.nextInt(); sc.nextLine();
+                    while (true) {
+                        
+                        System.out.print("COLUNA: ");
+                        col = TratarErros.pegarInteiro(sc.nextLine(), 1, 10);
 
-                    System.out.print("NOVO VALOR: ");
-                    Object valor = sc.nextLine();
+                        if (col == 0){
 
-                    System.out.print("ID: ");
-                    id = sc.nextInt(); sc.nextLine();
+                            //Chamando o cabeçalho personalizado
+                            Estilo.cabecalho(true);
+                            c.visualizar(al);
+                            TratarErros.dados_inseridos(valores_inseridos, nomes, TAM, false);
 
+                            continue;
+                        }
+
+                        valores_inseridos.add(col);
+
+                        break;
+                    }
+                    
+                    //Consistindo o novo valor
+                    while (true) {
+                        System.out.print("NOVO VALOR: ");
+                        valor = sc.nextLine();
+                        String valor_string  = (String) valor;
+
+
+                        if (valor_string.isEmpty()) {
+
+                            TratarErros.valorInvalido("Dados nulos não são válidos", sc, 40);
+                            Estilo.cabecalho(true);
+                            c.visualizar(al);
+                            TratarErros.dados_inseridos(valores_inseridos, nomes, TAM, false);
+                            continue;
+                        }
+
+                        valores_inseridos.add(valor);
+
+                        break;
+                    }
+                    
+                    //Consistindo o ID
+                    while (true) {
+                        System.out.print("ID: ");
+                        id_atualizar = TratarErros.pegarInteiro(sc.nextLine());
+
+                        if (id_atualizar == 0){
+                            
+                            Estilo.cabecalho(true);
+                            c.visualizar(al);
+                            TratarErros.dados_inseridos(valores_inseridos, nomes, TAM, false);
+                            
+                            continue;
+                        }
+
+                        break;
+                    }
+                    
                     //Atualizando os dados
-                    c.atualizar(al, col, valor, id);
+                    c.atualizar(al, col, valor, id_atualizar);
 
                     //Fedback para o usuário
                     Estilo.feedback("Dado atualizado com sucesso!", sc, al, c);
-                    sc.nextLine();
+
                     break;
 
                 case 4: //Deletar
+
+                    int id_deletar;
 
                     //Consistendo o valor do id
                     while (true) {
@@ -136,9 +198,9 @@ public class Main {
                         Estilo.l(TAM);
 
                         System.out.print("ID: ");
-                        id = TratarErros.pegarInteiro(sc.nextLine());
+                        id_deletar = TratarErros.pegarInteiro(sc.nextLine());
 
-                        if (id == 0){
+                        if (id_deletar == 0){
                             continue;
                         }
 
@@ -146,7 +208,7 @@ public class Main {
                     }
 
                     //Atualizando os dados
-                    c.deletar(al, id);
+                    c.deletar(al, id_deletar);
 
                     //Fedback para o usuário
                     Estilo.feedback("Dado deletado com sucesso!", sc, al, c);
