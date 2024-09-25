@@ -131,14 +131,14 @@ public class Crud extends Conexao{
     }
 
     //Modificar um dado existente
-    public void atualizar(Tabelas tabela, String coluna, Object valor, int id) throws ClassNotFoundException, SQLException{
+    public void atualizar(Tabelas tabela, int coluna, Object valor, int id) throws ClassNotFoundException, SQLException{
 
        Connection con = getConexao();
 
         //Preparando o comando SQL
         String sql = String.format("update %s set %s = '%s' where %s = %d", 
                                     tabela.getNomeTabela(),
-                                    coluna, 
+                                    getNomeColunas(tabela).get(coluna), 
                                     valor,
                                     getNomeColunas(tabela).get(0), 
                                     id);

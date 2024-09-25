@@ -85,7 +85,7 @@ public class Main {
                     TAM = 142;
 
                     //Chamando o cabeçalho personalizado
-                    Estilo.cabecalho();
+                    Estilo.cabecalho(false);
 
                     c.visualizar(al);
                     Estilo.l(TAM);
@@ -98,13 +98,13 @@ public class Main {
                     TAM = 142;
 
                     //Chamando o cabeçalho personalizado
-                    Estilo.cabecalho();
+                    Estilo.cabecalho(true);
                     c.visualizar(al);
 
                     //Pedindo informações necessárias para a atualização dos dados
                     Estilo.l(TAM);
                     System.out.print("COLUNA: ");
-                    String col = sc.nextLine();
+                    int col = sc.nextInt(); sc.nextLine();
 
                     System.out.print("NOVO VALOR: ");
                     Object valor = sc.nextLine();
@@ -129,7 +129,7 @@ public class Main {
                         TAM = 142;
 
                         //Chamando o cabeçalho personalizado
-                        Estilo.cabecalho();
+                        Estilo.cabecalho(false);
                         c.visualizar(al);
 
                         //Pedindo informações necessárias para a atualização dos dados

@@ -4,6 +4,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import oracle.sql.BOOLEAN;
+import oracle.sql.BlobDBAccess;
+
 public class Estilo {
     
     //Funções que printam uma linha na tela
@@ -39,7 +42,7 @@ public class Estilo {
     }
 
     //Cabeçalho personalizado criado para exibição dos dados
-    public static void cabecalho(){
+    public static void cabecalho(Boolean indice){
 
         int TAM = 142;
 
@@ -51,7 +54,7 @@ public class Estilo {
         Estilo.l(TAM);
 
         ArrayList<String> nomes = new ArrayList<>();
-        nomes = nomes_personalizados_colunas();
+        nomes = nomes_personalizados_colunas(indice);
 
         //Exibindo o título
         for(String nome : nomes){
@@ -63,22 +66,40 @@ public class Estilo {
     }
 
     //Função que define os nomes personalizados para as colunas
-    public static ArrayList<String> nomes_personalizados_colunas(){
+    public static ArrayList<String> nomes_personalizados_colunas(Boolean indice){
+        
         ArrayList<String> nomes = new ArrayList<>();
 
-        nomes.add("ID");
-        nomes.add("NOME");
-        nomes.add("CATEGORIA");
-        nomes.add("ESTOQUE");
-        nomes.add("PREÇO");
-        nomes.add("VALIDADE");
-        nomes.add("FABRICAÇÃO");
-        nomes.add("PESO/U");
-        nomes.add("MARCA");
-        nomes.add("PAÍS");
-        nomes.add("CÓD BARRAS");
+        if (indice){
+            nomes.add("ID");
+            nomes.add("(1) NOME");
+            nomes.add("(2) CAT");
+            nomes.add("(3) ESTOQ");
+            nomes.add("(4) PREÇO");
+            nomes.add("(5) VALI");
+            nomes.add("(6) FABRI");
+            nomes.add("(7) PESO");
+            nomes.add("(8) MARCA");
+            nomes.add("(9) PAÍS");
+            nomes.add("(10) CÓD");
 
         return nomes;
+
+        }else{
+            nomes.add("ID");
+            nomes.add("NOME");
+            nomes.add("CATEGORIA");
+            nomes.add("ESTOQUE");
+            nomes.add("PREÇO");
+            nomes.add("VALIDADE");
+            nomes.add("FABRICAÇÃO");
+            nomes.add("PESO");
+            nomes.add("MARCA");
+            nomes.add("PAÍS");
+            nomes.add("CÓD BARRAS");
+
+            return nomes;
+        }  
     }
 
     //Função que retorna um feedback para o usuário
@@ -87,7 +108,7 @@ public class Estilo {
         int TAM = 40;
         Estilo.limapTela();
         Estilo.l(TAM);
-        System.out.println(Estilo.centralizar("Dado deletado com sucesso!", TAM));
+        System.out.println(Estilo.centralizar(msg, TAM));
         Estilo.l(TAM);
 
         System.out.print("Pressione 'Enter' ver os dados...");
@@ -95,7 +116,7 @@ public class Estilo {
 
         TAM = 142;
         Estilo.limapTela();
-        cabecalho();
+        cabecalho(false);
         
         try{
             c.visualizar(al);

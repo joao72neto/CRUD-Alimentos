@@ -73,7 +73,7 @@ public class TratarErros {
         ArrayList<String> nomes_colunas = new ArrayList<>();
 
         //Pegando todos os nomes de colunas personalizados
-        nomes_colunas = Estilo.nomes_personalizados_colunas();
+        nomes_colunas = Estilo.nomes_personalizados_colunas(false);
 
 
         int TAM = 30;
