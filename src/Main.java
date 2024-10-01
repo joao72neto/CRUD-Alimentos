@@ -25,7 +25,7 @@ public class Main {
             TAM = 40;
 
             //Título
-            Estilo.limapTela();
+            Estilo.limpaTela();
             Estilo.l(TAM);
             System.out.println(Estilo.centralizar("CRUD de Alimentos", TAM));
             Estilo.l(TAM);
@@ -59,13 +59,13 @@ public class Main {
                 case 1: //Cadastrar 
 
                     //Limpando a tela do terminal
-                    Estilo.limapTela();
+                    Estilo.limpaTela();
 
                     //Pegando os valores para cadastro
                     TratarErros.pegar_dados_cadastrar(al, sc);
 
                     //Limpando a tela do terminal
-                    Estilo.limapTela();
+                    Estilo.limpaTela();
 
                     //Cadastrando no banco de dados
                     c.cadastrar(al);
@@ -223,7 +223,7 @@ public class Main {
 
                     TAM = 40;
 
-                    Estilo.limapTela();
+                    Estilo.limpaTela();
                     Estilo.l(TAM);
                     System.out.println(Estilo.centralizar("Opção inválida", TAM));
                     Estilo.l(TAM);
@@ -233,7 +233,7 @@ public class Main {
             }
         }  
 
-        Estilo.limapTela();
+        Estilo.limpaTela();
         Estilo.l(TAM);
         System.out.println(Estilo.centralizar("Fim do CRUD", TAM));
         Estilo.l(TAM);

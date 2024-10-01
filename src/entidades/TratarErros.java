@@ -16,7 +16,7 @@ public class TratarErros {
     //Função que exibe uma msg de valor inválido
     public static void valorInvalido(String msg, Scanner sc, int TAM){
             
-            Estilo.limapTela();
+            Estilo.limpaTela();
             Estilo.l(TAM);
             System.out.println(Estilo.centralizar(msg, TAM));
             Estilo.l(TAM);
@@ -89,7 +89,7 @@ public class TratarErros {
     public static void dados_inseridos(ArrayList<Object> valores_inseridos, ArrayList<String> nomes_colunas, int TAM, Boolean limpar){
         //Mostrando valores já adicionados
         if (limpar){
-            Estilo.limapTela();
+            Estilo.limpaTela();
         }
 
         Estilo.l(TAM);
@@ -124,7 +124,7 @@ public class TratarErros {
             
 
             if (id_tabela == 0){
-                Estilo.limapTela();
+                Estilo.limpaTela();
                 continue;
             }
 

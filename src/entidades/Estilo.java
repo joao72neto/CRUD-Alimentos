@@ -28,7 +28,7 @@ public class Estilo {
     }
 
     //Função que limpa a tela
-    public static void limapTela(){
+    public static void limpaTela(){
 
         try{
             if (System.getProperty("os.name").contains("Windows")){
@@ -47,7 +47,7 @@ public class Estilo {
 
         int TAM = 142;
 
-        Estilo.limapTela();
+        Estilo.limpaTela();
 
         //Personalianco o cabeçalho
         Estilo.l(TAM);
@@ -107,7 +107,7 @@ public class Estilo {
     public static void feedback(String msg, Scanner sc, Alimentos al, Crud c){
         
         int TAM = 40;
-        Estilo.limapTela();
+        Estilo.limpaTela();
         Estilo.l(TAM);
         System.out.println(Estilo.centralizar(msg, TAM));
         Estilo.l(TAM);
@@ -116,7 +116,7 @@ public class Estilo {
         sc.nextLine();
 
         TAM = 142;
-        Estilo.limapTela();
+        Estilo.limpaTela();
         cabecalho(false);
         
         try{
