@@ -24,6 +24,7 @@
 
 - JAVA
 - SQL / ORACLE
+- BATCHFILE
 
 - <h2 id="started">🚀 Primeiros Passos</h2>
 
@@ -35,3 +36,11 @@ Para testar o funcionamento do programa, o Oracle Express 21c precisa estar inst
 
 Como oracle instalado, você pode usar clicar no arquivo "compilar.bat" para compilar o programa
 e logo após "rodar.bat" para iniciá-lo
+
+<h3>Clonagem</h3>
+
+Use o comando abaixo para clonar este projeto
+
+```bash
+git clone https://github.com/joao72neto/CRUD-Alimentos
+```
