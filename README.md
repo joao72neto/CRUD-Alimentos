@@ -28,13 +28,50 @@
 
 - <h2 id="started">🚀 Primeiros Passos</h2>
 
-Para testar o funcionamento do programa, o Oracle Express 21c precisa estar instalado e rodando na sua máquina
-
 <h3>Pré-Requisitos</h3>
 
  - [ORACLE 21c](https://www.oracle.com/br/database/technologies/xe-downloads.html)
 
-Como oracle instalado, você pode usar clicar no arquivo "compilar.bat" para compilar o programa
+<h3>Estrutura do Banco</h3>
+
+- Tabela
+
+```SQL
+CREATE TABLE ALIMENTOS (
+    alm_id                 int constraint ck_alm_01 not null,                           
+    alm_nome               VARCHAR2(100) constraint ck_alm_02 not null,                  
+    alm_categoria          VARCHAR2(50) constraint ck_alm_03 not null,                  
+    alm_quantidade_estoque NUMBER(10, 2),                           
+    alm_preco              NUMBER(10, 2),                           
+    alm_data_validade      DATE,                                    
+    alm_data_fabricacao    DATE,                                    
+    alm_peso_por_unidade   NUMBER(10, 2),                           
+    alm_marca              VARCHAR2(50),                           
+    alm_pais_origem        VARCHAR2(50),                            
+    alm_codigo_barras      VARCHAR2(20),                           
+    PRIMARY KEY (alm_id)                                  
+);
+```
+- Sequence
+
+```SQL
+create sequence alm_sq nocache;
+```
+
+- Trigger
+  
+```SQL
+create trigger alm_tg_sq
+before insert on alimentos
+for each row
+begin 
+    :new.alm_id := alm_sq.nextval;
+    
+end;
+/
+```
+
+Com o Oracle instalado e a estrutura do banco criada, você pode dar 2 cliques no arquivo "compilar.bat" para compilar o programa
 e logo após "rodar.bat" para iniciá-lo
 
 <h3>Clonagem</h3>
