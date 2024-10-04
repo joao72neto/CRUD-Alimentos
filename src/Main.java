@@ -1,5 +1,4 @@
 import java.sql.SQLException;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import entidades.*;
 import java.util.ArrayList;
@@ -22,35 +21,37 @@ public class Main {
 
         while (rodar){
 
+            //Redefinindo o tamanho de centralização das strings e das linhas
             TAM = 40;
 
-            //Título
-            Estilo.limpaTela();
-            Estilo.l(TAM);
-            System.out.println(Estilo.centralizar("CRUD de Alimentos", TAM));
-            Estilo.l(TAM);
-
-            //Menu
-            System.out.println("1 - Cadastrar");
-            System.out.println("2 - Visualizar");
-            System.out.println("3 - Atualizar");
-            System.out.println("4 - Deletar");
-            System.out.println("5 - Sair");
-            Estilo.l(TAM);
-            System.out.print("Sua escolha: ");
-
-            //Variáveis para pegar a escolha do usuário  
+            //Variável que armazena a escolha do usuário para o menu principal
             int escolha = 0;
 
-            //Pegando a escolha do usuário
-            try {
-                escolha = sc.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Tipo Iválido " + e.toString());
-            } 
+            while(true){
+                //Título
+                Estilo.limpaTela();
+                Estilo.l(TAM);
+                System.out.println(Estilo.centralizar("CRUD de Alimentos", TAM));
+                Estilo.l(TAM);
 
-            //Limpando o buffer 
-            sc.nextLine();
+                //Menu
+                System.out.println("1 - Cadastrar");
+                System.out.println("2 - Visualizar");
+                System.out.println("3 - Atualizar");
+                System.out.println("4 - Deletar");
+                System.out.println("5 - Sair");
+                Estilo.l(TAM);
+                System.out.print("Sua escolha: ");
+
+                //Pegando a escolha do usuário            
+                escolha = TratarErros.pegarInteiro(sc.nextLine(), 1, 5);
+
+                if (escolha == 0){
+                    continue;
+                }
+
+                break;
+            }
 
             //Instanciando o crud
             Crud c = new Crud();
