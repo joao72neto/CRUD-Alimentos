@@ -37,6 +37,29 @@ public class TratarErros {
         }
     }
 
+    //Função que lê valores inteiros e verifica se entá dentro de um intervalo (array)
+    public static int pegarInteiro(String valor, ArrayList<Integer> intervalo){
+        
+        try {
+            int v = Integer.parseInt(valor);
+
+            //Verificando se está dentro do intervalo
+            for(Integer v_inter : intervalo){
+                if (v == v_inter){
+                    return v;
+                }
+            }
+
+            //Valor não se encontra no intervalo desejado
+            valorInvalido("Valor fora do intervalo", sc, TAM);
+            return 0;
+
+        } catch (NumberFormatException e) {
+            valorInvalido("O Valor não é inteiro", sc, TAM);
+            return 0;
+        }
+    }
+
     //Função que lê apenas valores inteiros dentro de um intervalo
     public static int pegarInteiro(String valor, int inicio, int fim){
         
