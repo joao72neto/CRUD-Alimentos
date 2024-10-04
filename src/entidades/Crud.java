@@ -2,7 +2,6 @@ package entidades;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.lang.reflect.Field;
 
 public class Crud extends Conexao{
     
@@ -14,7 +13,7 @@ public class Crud extends Conexao{
         
         //Pegando iformações sobre a tabela
         //ArrayList<String> nomeColunas = getNomeColunas(tabela);
-        ArrayList<Object> valorColunas = getValorColunas(tabela);
+        ArrayList<Object> valorColunas = tabela.getValorColunas(tabela);
         String nomeTabela = tabela.getNomeTabela();
 
         //Inserindo dados de forma dinâmica
@@ -81,7 +80,7 @@ public class Crud extends Conexao{
         
         //Variáveis necessárias para mostrar os dados
         ArrayList<ArrayList<Object>> dados = new ArrayList<>();
-        ArrayList<String> nomeColunas = getNomeColunas(tabela);
+        ArrayList<String> nomeColunas = tabela.getNomeColunas(tabela);
 
         //Organizando os dados em uma matriz
         while (resultado.next()) {
@@ -136,7 +135,7 @@ public class Crud extends Conexao{
         Connection con = getConexao();
 
         //Preparando o comando SQL
-        String sql = "select * from " + tabela.getNomeTabela() + " where " + getNomeColunas(tabela).get(0) + " = " + id;
+        String sql = "select * from " + tabela.getNomeTabela() + " where " + tabela.getNomeColunas(tabela).get(0) + " = " + id;
         PreparedStatement comando = con.prepareStatement(sql);
 
         //Capturando todos os resultados
@@ -144,7 +143,7 @@ public class Crud extends Conexao{
         
         //Variáveis necessárias para mostrar os dados
         ArrayList<ArrayList<Object>> dados = new ArrayList<>();
-        ArrayList<String> nomeColunas = getNomeColunas(tabela);
+        ArrayList<String> nomeColunas = tabela.getNomeColunas(tabela);
 
         //Organizando os dados em uma matriz
         while (resultado.next()) {
@@ -199,9 +198,9 @@ public class Crud extends Conexao{
         //Preparando o comando SQL
         String sql = String.format("update %s set %s = '%s' where %s = %d", 
                                     tabela.getNomeTabela(),
-                                    getNomeColunas(tabela).get(coluna), 
+                                    tabela.getNomeColunas(tabela).get(coluna), 
                                     valor,
-                                    getNomeColunas(tabela).get(0), 
+                                    tabela.getNomeColunas(tabela).get(0), 
                                     id);
 
         PreparedStatement comando = con.prepareStatement(sql);
@@ -223,7 +222,7 @@ public class Crud extends Conexao{
         Connection con = getConexao();
 
         //Preparando o comando SQL
-        String sql = String.format("delete from %s where %s = %d",tabela.getNomeTabela() ,getNomeColunas(tabela).get(0), id);
+        String sql = String.format("delete from %s where %s = %d",tabela.getNomeTabela() ,tabela.getNomeColunas(tabela).get(0), id);
 
         //Preparando o comando SQL
         PreparedStatement comando = con.prepareStatement(sql);
@@ -236,39 +235,4 @@ public class Crud extends Conexao{
         con.close();
     
     }
-
-    //Método que pega todos os valores das colunas de uma tabela
-    private ArrayList<Object> getValorColunas(Object obj) {
-
-        ArrayList<Object> valorColunas = new ArrayList<>();
-
-        //Guardando os atributos declarados
-        Field[] campos = obj.getClass().getDeclaredFields();
-        for (Field campo : campos){
-            campo.setAccessible(true);
-            try{
-                valorColunas.add(campo.get(obj));
-            }catch(IllegalAccessException e){
-                System.out.println("Erro: " + e.toString());
-            }  
-        }
-
-        return valorColunas;
-    }
-
-    //Método que retorna todos os nomes das colunas de uma tabela
-    private ArrayList<String> getNomeColunas(Object obj) {
-        
-        ArrayList<String> nomeColunas = new ArrayList<>();
-
-        //Guardando os atributos declarados
-        Field[] campos = obj.getClass().getDeclaredFields();
-        for (Field campo : campos){
-            campo.setAccessible(true);
-            nomeColunas.add(campo.getName());
-        }
-        
-        return nomeColunas;
-    }
-
 }
