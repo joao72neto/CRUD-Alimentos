@@ -80,11 +80,32 @@ public class Main {
                     break;
 
                 case 2:// Visualizar
+
                     TAM = 142;
+
+                    int resp_visualizar = 0;
+
+                    while (true){
+                        //Submenu
+                        Estilo.limpaTela();
+                        System.out.println("1 - Por id");
+                        System.out.println("2 - Tudo");
+                        Estilo.l(TAM);
+                        System.out.print("Sua escolha: ");
+
+                        //Pegando a escolha do usuário
+                        resp_visualizar = TratarErros.pegarInteiro(sc.nextLine(), 1, 2);
+
+                        if (resp_visualizar == 0){
+                            continue;
+                        }   
+
+                        break;
+                    }
 
                     //Chamando o cabeçalho personalizado
                     Estilo.cabecalho(false);
-
+                    
                     c.visualizar(al);
                     Estilo.l(TAM);
                     System.out.print("Pressione 'Enter' para voltar...");

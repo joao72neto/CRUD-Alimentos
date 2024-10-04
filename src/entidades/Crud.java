@@ -130,6 +130,67 @@ public class Crud extends Conexao{
 
     }
 
+    //Sobrecarga do método visulizar, caso o usuário queira filtrar por id
+    public void visualizar(Tabelas tabela, int id) throws ClassNotFoundException, SQLException{
+
+        Connection con = getConexao();
+
+        //Preparando o comando SQL
+        String sql = "select * from " + tabela.getNomeTabela() + " where " + getNomeColunas(tabela).get(0) + " = " + id;
+        PreparedStatement comando = con.prepareStatement(sql);
+
+        //Capturando todos os resultados
+        ResultSet resultado = comando.executeQuery();
+        
+        //Variáveis necessárias para mostrar os dados
+        ArrayList<ArrayList<Object>> dados = new ArrayList<>();
+        ArrayList<String> nomeColunas = getNomeColunas(tabela);
+
+        //Organizando os dados em uma matriz
+        while (resultado.next()) {
+            
+            ArrayList<Object> linha = new ArrayList<>();
+
+            for(int i=1; i <= nomeColunas.size(); i++){
+
+                Object valor = resultado.getObject(i);
+
+                if (valor instanceof java.util.Date){
+                    Timestamp timestamp = (Timestamp) valor;
+                    valor = timestamp.toLocalDateTime().toLocalDate().toString();
+                }
+
+
+                linha.add(valor);
+            }
+
+            dados.add(linha);
+
+        }
+
+        /* 
+        //Exibindo o título
+        for(String nome : nomeColunas){
+            System.out.printf("%-10s | ", nome);
+        }*/
+
+        //Exibindo todos os dados
+        for(ArrayList<Object> l : dados){
+
+            for(Object d : l){
+                System.out.printf("%-10s | ", d);
+            }
+            
+            System.out.println();
+        }
+
+
+        //Fechando as conexões
+        comando.close();
+        resultado.close();
+        con.close();
+    }
+
     //Modificar um dado existente
     public void atualizar(Tabelas tabela, int coluna, Object valor, int id) throws ClassNotFoundException, SQLException{
 
