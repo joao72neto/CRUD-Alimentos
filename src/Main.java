@@ -17,7 +17,7 @@ public class Main {
         //tabela de alimentos
         Alimentos al = new Alimentos();
 
-        //Tmanho que as strings precisam estar centralizadas
+        //Tamanho que as strings precisam estar centralizadas
         int TAM = 0;
 
         while (rodar){
@@ -58,13 +58,13 @@ public class Main {
             switch (escolha) {
                 case 1: //Cadastrar 
 
-                    //Limpando a tela do terminal
+                    //Limpando a tela com as opções do menu
                     Estilo.limpaTela();
 
                     //Pegando os valores para cadastro
                     TratarErros.pegar_dados_cadastrar(al, sc);
 
-                    //Limpando a tela do terminal
+                    //Limpando a tela com os dados inseridos para cadastro
                     Estilo.limpaTela();
 
                     //Cadastrando no banco de dados
@@ -108,7 +108,7 @@ public class Main {
                     Estilo.cabecalho(true);
                     c.visualizar(al);
 
-                    //Varivaeis usadoas para o cadastro
+                    //Variaveis usadas para o cadastro
                     int col, id_atualizar;
                     Object valor;
 
