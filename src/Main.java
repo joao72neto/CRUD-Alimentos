@@ -150,8 +150,8 @@ public class Main {
 
                     //Definindo os nomes
                     nomes.add("COLUNA");
-                    nomes.add("NOVO VALOR");
                     nomes.add("ID");
+                    nomes.add("NOVO VALOR");
 
                     TAM = 142;
 
@@ -184,6 +184,23 @@ public class Main {
 
                         break;
                     }
+
+                    //Consistindo o ID
+                    while (true) {
+                        System.out.print("ID: ");
+                        id_atualizar = TratarErros.pegarInteiro(sc.nextLine(), al.getIds(al));
+
+                        if (id_atualizar == 0){
+                            
+                            Estilo.cabecalho(true);
+                            c.visualizar(al);
+                            TratarErros.dados_inseridos(valores_inseridos, nomes, TAM, false);
+                            
+                            continue;
+                        }
+
+                        break;
+                    }
                     
                     //Consistindo o novo valor
                     while (true) {
@@ -202,23 +219,6 @@ public class Main {
                         }
 
                         valores_inseridos.add(valor);
-
-                        break;
-                    }
-                    
-                    //Consistindo o ID
-                    while (true) {
-                        System.out.print("ID: ");
-                        id_atualizar = TratarErros.pegarInteiro(sc.nextLine());
-
-                        if (id_atualizar == 0){
-                            
-                            Estilo.cabecalho(true);
-                            c.visualizar(al);
-                            TratarErros.dados_inseridos(valores_inseridos, nomes, TAM, false);
-                            
-                            continue;
-                        }
 
                         break;
                     }
@@ -249,7 +249,7 @@ public class Main {
                         Estilo.l(TAM);
 
                         System.out.print("ID: ");
-                        id_deletar = TratarErros.pegarInteiro(sc.nextLine());
+                        id_deletar = TratarErros.pegarInteiro(sc.nextLine(), al.getIds(al));
 
                         if (id_deletar == 0){
                             continue;
