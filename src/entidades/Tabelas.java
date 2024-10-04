@@ -1,9 +1,9 @@
 package entidades;
 
 
-public interface Tabelas {
+public abstract class Tabelas {
 
     //Métodos a serem implementados
-    public String getNomeTabela();
+    public abstract String getNomeTabela();
     
 }

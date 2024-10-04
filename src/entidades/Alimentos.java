@@ -2,7 +2,7 @@ package entidades;
 
 import java.sql.Date;
 
-public class Alimentos implements Tabelas{
+public class Alimentos extends Tabelas{
 
     //Atributos
     private int alm_id;
