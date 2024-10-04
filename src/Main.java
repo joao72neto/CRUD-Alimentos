@@ -81,13 +81,14 @@ public class Main {
 
                 case 2:// Visualizar
 
-                    TAM = 142;
+                    TAM = 40;
 
                     int resp_visualizar = 0;
 
                     while (true){
                         //Submenu
                         Estilo.limpaTela();
+                        Estilo.l(TAM);
                         System.out.println("1 - Por id");
                         System.out.println("2 - Tudo");
                         Estilo.l(TAM);
@@ -103,11 +104,39 @@ public class Main {
                         break;
                     }
 
+                    //Verificando a escolha do usuário
+                    if(resp_visualizar == 1){
+
+                        int id_busca = 0;
+                        
+                        while(true){
+                            Estilo.limpaTela();
+                            Estilo.l(TAM);
+                            System.out.print("ID: ");
+                            id_busca = TratarErros.pegarInteiro(sc.nextLine(), al.getIds(al));
+
+                            if (id_busca == 0){
+                                continue;
+                            }
+
+                            break;
+                        }
+
+                        //Chamando o cabeçalho personalizado
+                        Estilo.cabecalho(false);
+
+                        c.visualizar(al, id_busca);
+                        Estilo.l(142);
+                        System.out.print("Pressione 'Enter' para voltar...");
+                        sc.nextLine();
+                        break;
+                    }
+
                     //Chamando o cabeçalho personalizado
                     Estilo.cabecalho(false);
                     
                     c.visualizar(al);
-                    Estilo.l(TAM);
+                    Estilo.l(142);
                     System.out.print("Pressione 'Enter' para voltar...");
                     sc.nextLine();
                     break;
